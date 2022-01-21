@@ -9,6 +9,29 @@ go version go1.16+ 或
 - 实现 Windows OS 按文件名排序
 - 实现 MAC OS 按文件名排序
 
+## 简单使用
+
+获取包 `go get github.com/ikaiguang/go-sort-by-filename`
+
+```go
+
+package main
+
+import (
+	"os"
+	
+	ossort "github.com/ikaiguang/go-sort-by-filename"
+)
+
+func main() {
+	ossort.FilenameAsc([]string{})
+	ossort.FilenameDesc([]string{})
+	ossort.FileInfoAsc([]os.FileInfo{})
+	ossort.FileInfoDesc([]os.FileInfo{})
+}
+
+```
+
 ## 排序示例
 
 ```txt
@@ -40,6 +63,8 @@ go version go1.16+ 或
 ## Test
 
 ```shell
+
+go test -v -count=1 ./ -test.run=TestFileInfo_Sort
 
 go test -v -count=1 ./ -test.run=TestFilename_Sort
 
