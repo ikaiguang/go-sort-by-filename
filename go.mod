@@ -1,4 +1,4 @@
-module ossort
+module github.com/ikaiguang/go-sort-by-filename
 
 go 1.16
 
