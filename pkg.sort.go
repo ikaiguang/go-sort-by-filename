@@ -11,7 +11,7 @@ import (
 
 var (
 	// gbkEncoder gbk encoder
-	gbkEncoder = simplifiedchinese.GBK.NewEncoder()
+	gbkEncoder = simplifiedchinese.GB18030.NewEncoder()
 )
 
 // GenSortName 排序的名称
@@ -77,7 +77,7 @@ func SplitFilename(filename string) (preInt64Str, middleStr, sufInt64Str, ext st
 		if '0' > name[i] || name[i] > '9' {
 			break
 		}
-		sufInt64Str += string(name[i])
+		sufInt64Str = string(name[i]) + sufInt64Str
 	}
 
 	if len(preInt64Str) != len(name) {

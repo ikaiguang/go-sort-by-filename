@@ -11,6 +11,7 @@ import (
 // go test -v -count=1 ./ -test.run=TestFileInfo_Sort
 func TestFileInfo_Sort(t *testing.T) {
 	srcPath := "./testdata"
+	//srcPath := "./test/fish_gif"
 
 	// 读取文件信息
 	fi, err := readDir(srcPath)
@@ -19,10 +20,6 @@ func TestFileInfo_Sort(t *testing.T) {
 	// 读取文件信息
 	descFi, err := readDir(srcPath)
 	require.Nil(t, err)
-
-	t.Log(len(fi))
-	t.Log(len(descFi))
-	t.Log(len(fi) == len(descFi))
 
 	// 原名称
 	var originNameSlice = make([]string, len(fi))
@@ -39,6 +36,11 @@ func TestFileInfo_Sort(t *testing.T) {
 	for i := range originNameSlice {
 		fmt.Printf("%-36s %-36s %-36s\n", originNameSlice[i], fi[i].Name(), descFi[i].Name())
 	}
+	//sort.Strings(originNameSlice)
+	//for i := range originNameSlice {
+	//	preInt64Str, middleStr, sufInt64Str, ext := SplitFilename(originNameSlice[i])
+	//	fmt.Println(originNameSlice[i], preInt64Str, middleStr, sufInt64Str, ext)
+	//}
 }
 
 // readDir .
