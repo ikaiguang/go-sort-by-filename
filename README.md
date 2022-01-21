@@ -34,27 +34,26 @@ func main() {
 
 ```txt
 
-    排序前                   排序后
-    -1.txt                  1a.txt
-    11a.txt                 1a1.txt
-    11a11.txt               2a.txt
-    123.txt                 2a2.txt
-    1a.txt                  11a.txt
-    1a1.txt                 11a11.txt
-    2a.txt                  123.txt
-    2a2.txt                 -1.txt
-    A1.txt                  _1.txt
-    B1x.txt                 A1.txt
-    _1.txt                  a-1.txt
-    a-1.txt                 a-2.txt
-    a-11.txt                a-11.txt
-    a-2.txt                 a11x.txt
-    a11x.txt                a1x.txt
-    a1x.txt                 a2x.txt
-    a2x.txt                 b1.txt
-    b1.txt                  B1x.txt
-    中国.txt                 微信.txt
-    微信.txt                 中国.txt
+origin                               sorted-asc                           sorted-desc                         
+B1x.txt                              1a.txt                               中国.txt                              
+中国.txt                              1a1.txt                              微信.txt                              
+2a2.txt                              2a.txt                               special                             
+11a.txt                              2a2.txt                              B1x.txt                             
+1a.txt                               11a.txt                              b1.txt                              
+a-2.txt                              11a11.txt                            a2x.txt                             
+a11x.txt                             123.txt                              a1x.txt                             
+a-1.txt                              A1.txt                               a11x.txt                            
+微信.txt                              a-1.txt                              a-11.txt                            
+A1.txt                               a-2.txt                              a-2.txt                             
+1a1.txt                              a-11.txt                             a-1.txt                             
+a1x.txt                              a11x.txt                             A1.txt                              
+special                              a1x.txt                              123.txt                             
+a-11.txt                             a2x.txt                              11a11.txt                           
+11a11.txt                            b1.txt                               11a.txt                             
+b1.txt                               B1x.txt                              2a2.txt                             
+a2x.txt                              special                              2a.txt                              
+123.txt                              微信.txt                              1a1.txt                             
+2a.txt                               中国.txt                              1a.txt 
 
 ```
 
