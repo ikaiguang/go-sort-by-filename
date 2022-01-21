@@ -4,8 +4,6 @@ os sorted by file name
 
 **Note** : 文件名称包涵特殊字符(-_)，排序的位置根据视操作系统语言而定
 
-go version go1.16+ 或
-
 - 实现 Windows OS 按文件名排序
 - 实现 MAC OS 按文件名排序
 
@@ -19,7 +17,7 @@ package main
 
 import (
 	"os"
-	
+
 	ossort "github.com/ikaiguang/go-sort-by-filename"
 )
 
