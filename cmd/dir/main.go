@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/pkg/errors"
 
@@ -27,40 +28,45 @@ func main() {
 		}
 	}()
 
-	srcPath, err := handler.initSrcPath()
-	if err != nil {
-		return
-	}
-
-	fi, err := handler.getFileInfos(srcPath)
+	// 文件目录
+	srcPath, err := handler.validateSrcPath()
 	if err != nil {
 		return
 	}
 
 	// 读取文件信息
+	ascFi, err := handler.getFileInfos(srcPath)
+	if err != nil {
+		return
+	}
+	// 再次读取文件信息
 	descFi, err := handler.getFileInfos(srcPath)
 	if err != nil {
 		return
 	}
 
-	// 原名称
-	var originNameSlice = make([]string, len(fi))
-	for i := range fi {
-		originNameSlice[i] = fi[i].Name()
+	// 原名称：程序编码排序
+	var originNameSlice = make([]string, len(ascFi))
+	for i := range ascFi {
+		originNameSlice[i] = ascFi[i].Name()
 	}
 
-	ossort.FileInfoAsc(fi)
+	// 顺序排序
+	ossort.FileInfoAsc(ascFi)
+	// 倒叙排序
 	ossort.FileInfoDesc(descFi)
 
-	fmt.Printf("%-36s %-36s %-36s\n", "origin", "sorted-asc", "sorted-desc")
+	tableSep := strings.Repeat("-", 36)
+	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "-排序：升序", "排序：降序")
+	fmt.Printf("| %s | %s | %s |\n", tableSep, tableSep, tableSep)
 	for i := range originNameSlice {
-		fmt.Printf("%-36s %-36s %-36s\n", originNameSlice[i], fi[i].Name(), descFi[i].Name())
+		fmt.Printf("| %-36s | %-36s | %-36s |\n", originNameSlice[i], ascFi[i].Name(), descFi[i].Name())
 	}
 }
 
 type test struct{}
 
-// getFileInfos .
+// getFileInfos 获取目录文件信息
 func (s *test) getFileInfos(srcPath string) (fi []os.FileInfo, err error) {
 	// 遍历所有的目录
 	//walkDirFn := func(path string, d fs.DirEntry, err error) error {
@@ -92,7 +98,8 @@ func (s *test) getFileInfos(srcPath string) (fi []os.FileInfo, err error) {
 	return
 }
 
-func (s *test) initSrcPath() (srcPath string, err error) {
+// validateSrcPath 验证源目录
+func (s *test) validateSrcPath() (srcPath string, err error) {
 	srcPath = "."
 	if len(os.Args) > 1 {
 		srcPath = os.Args[1]

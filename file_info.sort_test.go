@@ -3,6 +3,7 @@ package ossort
 import (
 	"fmt"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -32,9 +33,11 @@ func TestFileInfo_Sort(t *testing.T) {
 	handler.Asc(fi)
 	handler.Desc(descFi)
 
-	fmt.Printf("%-36s %-36s %-36s\n", "origin", "sorted-asc", "sorted-desc")
+	tableSep := strings.Repeat("-", 36)
+	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "-排序：升序", "排序：降序")
+	fmt.Printf("| %s | %s | %s |\n", tableSep, tableSep, tableSep)
 	for i := range originNameSlice {
-		fmt.Printf("%-36s %-36s %-36s\n", originNameSlice[i], fi[i].Name(), descFi[i].Name())
+		fmt.Printf("| %-36s | %-36s | %-36s |\n", originNameSlice[i], fi[i].Name(), descFi[i].Name())
 	}
 	//sort.Strings(originNameSlice)
 	//for i := range originNameSlice {

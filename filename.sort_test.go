@@ -2,6 +2,7 @@ package ossort
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -19,8 +20,10 @@ func TestFilename_Sort(t *testing.T) {
 	handler.Asc(ascSlice)
 	handler.Desc(descSlice)
 
-	fmt.Printf("%-36s %-36s %-36s\n", "origin", "sorted-asc", "sorted-desc")
+	tableSep := strings.Repeat("-", 36)
+	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "-排序：升序", "排序：降序")
+	fmt.Printf("| %s | %s | %s |\n", tableSep, tableSep, tableSep)
 	for i := range originSlice {
-		fmt.Printf("%-36s %-36s %-36s\n", originSlice[i], ascSlice[i], descSlice[i])
+		fmt.Printf("| %-36s | %-36s | %-36s |\n", originSlice[i], ascSlice[i], descSlice[i])
 	}
 }
