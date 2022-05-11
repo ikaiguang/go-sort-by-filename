@@ -1,7 +1,6 @@
 package ossort
 
 import (
-	"os"
 	"sort"
 )
 
@@ -37,7 +36,7 @@ func (s *sortByName) Asc(infos []Name) {
 		return sortSlice[i].SortKey < sortSlice[j].SortKey
 	})
 	for i := range sortSlice {
-		infos[i] = sortSlice[i].OriginData.(os.FileInfo)
+		infos[i] = sortSlice[i].OriginData.(Name)
 	}
 	return
 }
@@ -49,7 +48,7 @@ func (s *sortByName) Desc(infos []Name) {
 		return sortSlice[i].SortKey > sortSlice[j].SortKey
 	})
 	for i := range sortSlice {
-		infos[i] = sortSlice[i].OriginData.(os.FileInfo)
+		infos[i] = sortSlice[i].OriginData.(Name)
 	}
 	return
 }
