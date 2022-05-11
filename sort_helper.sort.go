@@ -7,6 +7,7 @@ import (
 var (
 	filenameHandler = NewSortByFilename()
 	fileInfoHandler = NewSortByFileInfo()
+	sortNameHandler = NewSortByName()
 )
 
 // FilenameAsc .
@@ -27,4 +28,14 @@ func FileInfoAsc(infoSlice []os.FileInfo) {
 // FileInfoDesc .
 func FileInfoDesc(infoSlice []os.FileInfo) {
 	fileInfoHandler.Desc(infoSlice)
+}
+
+// Asc .
+func Asc(infos []Name) {
+	sortNameHandler.Asc(infos)
+}
+
+// Desc .
+func Desc(infos []Name) {
+	sortNameHandler.Desc(infos)
 }

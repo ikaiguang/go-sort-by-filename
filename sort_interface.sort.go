@@ -37,3 +37,17 @@ type SortByFileInfo interface {
 	// SliceStable 自定义排序 = sort.SliceStable
 	SliceStable(fi []os.FileInfo, less func(i, j int) bool)
 }
+
+// SortByName 排序接口
+type SortByName interface {
+	// Identifier 排序凭证
+	Identifier(infos []Name) []*SortIdentifier
+	// Asc 文件名升序排序
+	Asc(infos []Name)
+	// Desc 文件名倒序排序
+	Desc(infos []Name)
+	// Slice 自定义排序 = sort.Sort
+	Slice(infos []Name, less func(i, j int) bool)
+	// SliceStable 自定义排序 = sort.SliceStable
+	SliceStable(infos []Name, less func(i, j int) bool)
+}

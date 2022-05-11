@@ -2,7 +2,6 @@ package ossort
 
 import (
 	"fmt"
-	"os"
 	"strings"
 	"testing"
 
@@ -15,11 +14,11 @@ func TestFileInfo_Sort(t *testing.T) {
 	//srcPath := "./test/fish_gif"
 
 	// 读取文件信息
-	fi, err := readDir(srcPath)
+	fi, err := ReadDir(srcPath)
 	require.Nil(t, err)
 
 	// 读取文件信息
-	descFi, err := readDir(srcPath)
+	descFi, err := ReadDir(srcPath)
 	require.Nil(t, err)
 
 	// 原名称
@@ -44,21 +43,4 @@ func TestFileInfo_Sort(t *testing.T) {
 	//	preInt64Str, middleStr, sufInt64Str, ext := SplitFilename(originNameSlice[i])
 	//	fmt.Println(originNameSlice[i], preInt64Str, middleStr, sufInt64Str, ext)
 	//}
-}
-
-// readDir .
-func readDir(srcPath string) (fi []os.FileInfo, err error) {
-	// 处理目录
-	d, err := os.Open(srcPath)
-	if err != nil {
-		return fi, err
-	}
-	defer func() { _ = d.Close() }()
-
-	// 读取文件信息
-	fi, err = d.Readdir(-1)
-	if err != nil {
-		return fi, err
-	}
-	return fi, err
 }
