@@ -33,7 +33,7 @@ func TestFileInfo_Sort(t *testing.T) {
 	handler.Desc(descFi)
 
 	tableSep := strings.Repeat("-", 36)
-	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "-排序：升序", "排序：降序")
+	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "排序：升序", "排序：降序")
 	fmt.Printf("| %s | %s | %s |\n", tableSep, tableSep, tableSep)
 	for i := range originNameSlice {
 		fmt.Printf("| %-36s | %-36s | %-36s |\n", originNameSlice[i], fi[i].Name(), descFi[i].Name())
