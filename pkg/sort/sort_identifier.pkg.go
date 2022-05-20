@@ -1,8 +1,7 @@
-package ossort
+package sortpkg
 
 import (
 	"encoding/binary"
-	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
@@ -15,10 +14,10 @@ var (
 	gbkEncoder = simplifiedchinese.GB18030.NewEncoder()
 )
 
-// GenSortName 排序的名称
+// GenSortIdentifier 排序的标识
 // 分割为：前面数字 中间文字 后面数字 文件后缀
-func GenSortName(filename string) string {
-	preInt64Str, middleStr, sufInt64Str, ext := SplitFilename(filename)
+func GenSortIdentifier(filename string) string {
+	preInt64Str, middleStr, sufInt64Str, ext := SplitString(filename)
 
 	// string numeric prefix to uint64 bytes
 	// empty string is zero, so integers are plus one
@@ -59,8 +58,8 @@ func GenSortName(filename string) string {
 	return prefixB64Str + middleStr + suffixB64Str + ext
 }
 
-// SplitFilename 切分文件名
-func SplitFilename(filename string) (preInt64Str, middleStr, sufInt64Str, ext string) {
+// SplitString 切分名称
+func SplitString(filename string) (preInt64Str, middleStr, sufInt64Str, ext string) {
 	ext = filepath.Ext(filename)
 	name := filename[:len(filename)-len(ext)]
 
@@ -85,21 +84,4 @@ func SplitFilename(filename string) (preInt64Str, middleStr, sufInt64Str, ext st
 		middleStr = name[len(preInt64Str) : len(name)-len(sufInt64Str)]
 	}
 	return
-}
-
-// ReadDir .
-func ReadDir(srcPath string) (fi []os.FileInfo, err error) {
-	// 处理目录
-	d, err := os.Open(srcPath)
-	if err != nil {
-		return fi, err
-	}
-	defer func() { _ = d.Close() }()
-
-	// 读取文件信息
-	fi, err = d.Readdir(-1)
-	if err != nil {
-		return fi, err
-	}
-	return fi, err
 }

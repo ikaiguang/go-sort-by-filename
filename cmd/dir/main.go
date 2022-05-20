@@ -7,14 +7,14 @@ import (
 	"path/filepath"
 	"strings"
 
+	sortutil "github.com/ikaiguang/go-sort-by-filename/v2"
 	"github.com/pkg/errors"
-
-	ossort "github.com/ikaiguang/go-sort-by-filename"
 )
 
 // CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./bin/ ./cmd/dir/...
 // CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -o ./bin/ ./cmd/dir/...
 // CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o ./bin/ ./cmd/dir/...
+// go run ./cmd/dir/... ./testdata
 func main() {
 	handler := &test{}
 	var err error
@@ -45,22 +45,23 @@ func main() {
 		return
 	}
 
-	// 原名称：程序编码排序
-	var originNameSlice = make([]string, len(ascFi))
+	// 原名称
+	var (
+		originNameSlice = make([]string, len(ascFi))
+	)
 	for i := range ascFi {
 		originNameSlice[i] = ascFi[i].Name()
 	}
 
-	// 顺序排序
-	ossort.FileInfoAsc(ascFi)
-	// 倒叙排序
-	ossort.FileInfoDesc(descFi)
+	// 排序后
+	ascFiSort := sortutil.FileInfoAsc(ascFi)
+	descFiSort := sortutil.FileInfoDesc(descFi)
 
 	tableSep := strings.Repeat("-", 36)
-	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "-排序：升序", "排序：降序")
+	fmt.Printf("| %-36s | %-36s | %-36s |\n", "排序：程序编码", "排序：升序", "排序：降序")
 	fmt.Printf("| %s | %s | %s |\n", tableSep, tableSep, tableSep)
 	for i := range originNameSlice {
-		fmt.Printf("| %-36s | %-36s | %-36s |\n", originNameSlice[i], ascFi[i].Name(), descFi[i].Name())
+		fmt.Printf("| %-36s | %-36s | %-36s |\n", originNameSlice[i], ascFiSort[i].Value().Name(), descFiSort[i].Value().Name())
 	}
 }
 
